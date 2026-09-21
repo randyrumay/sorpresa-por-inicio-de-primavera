@@ -1,18 +1,10 @@
-Imports System.IO
-Imports System.Text
-
-Module SorpresaPrimavera
-
-    Sub Main()
-
-        Dim html As String = "
 <!DOCTYPE html>
-<html lang='es'>
+<html lang="es">
 <head>
-<meta charset='UTF-8'>
-<meta name='viewport' content='width=device-width, initial-scale=1.0'>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Para Karyn 🌼</title>
+<title>Una pequeña sorpresa para Karyn 🌼</title>
 
 <style>
 
@@ -20,389 +12,854 @@ Module SorpresaPrimavera
     box-sizing: border-box;
 }
 
+html {
+    scroll-behavior: smooth;
+}
+
 body {
     margin: 0;
     min-height: 100vh;
-    font-family: 'Georgia', serif;
-    background: linear-gradient(180deg, #fffdf3, #fff7c7);
+    font-family: Georgia, "Times New Roman", serif;
+    color: #4b3a19;
+    background:
+        radial-gradient(circle at top, #fffef2 0%, #fff8d6 45%, #f8e9a7 100%);
     overflow-x: hidden;
-    color: #4a3b18;
 }
 
-/* Pantalla inicial */
+/* =========================
+   PANTALLA DE INICIO
+   ========================= */
 
 #inicio {
     position: fixed;
     inset: 0;
-    background: linear-gradient(135deg, #fff9d6, #ffe680);
+    z-index: 1000;
+
     display: flex;
-    flex-direction: column;
-    justify-content: center;
     align-items: center;
-    text-align: center;
-    z-index: 100;
-    transition: opacity 1.5s ease;
+    justify-content: center;
+
     padding: 25px;
-}
 
-#inicio h1 {
-    font-size: 30px;
-    margin-bottom: 10px;
-}
-
-#inicio p {
-    font-size: 18px;
-    margin-bottom: 30px;
-}
-
-.boton {
-    background: #d9a400;
-    color: white;
-    border: none;
-    padding: 15px 30px;
-    border-radius: 30px;
-    font-size: 17px;
-    cursor: pointer;
-    box-shadow: 0 5px 15px rgba(0,0,0,.2);
-}
-
-/* Contenido */
-
-#contenido {
-    display: none;
     text-align: center;
-    padding: 45px 20px;
-    animation: aparecer 2s ease;
+
+    background:
+        radial-gradient(circle at center, #fffef0 0%, #fff5c4 55%, #f4dc82 100%);
+
+    transition:
+        opacity 1.4s ease,
+        visibility 1.4s ease;
 }
 
-@keyframes aparecer {
+#inicio.ocultar {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+}
+
+.inicio-contenido {
+    max-width: 600px;
+    animation: entrada 1.5s ease;
+}
+
+@keyframes entrada {
     from {
         opacity: 0;
         transform: translateY(30px);
     }
+
     to {
         opacity: 1;
         transform: translateY(0);
     }
 }
 
+.pieza-principal {
+    font-size: 75px;
+    margin-bottom: 15px;
+
+    animation:
+        flotar 3s ease-in-out infinite,
+        aparecer 1.5s ease;
+}
+
+@keyframes flotar {
+    0%, 100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-10px);
+    }
+}
+
+.inicio-contenido h1 {
+    margin: 0;
+
+    font-size: clamp(28px, 7vw, 46px);
+    font-weight: normal;
+
+    color: #5a4617;
+}
+
+.inicio-contenido .frase {
+    margin: 18px auto 30px;
+
+    max-width: 480px;
+
+    font-size: 18px;
+    line-height: 1.7;
+
+    color: #705d2e;
+}
+
+.boton-descubrir {
+    border: none;
+
+    padding: 15px 32px;
+
+    border-radius: 50px;
+
+    background: #c99b18;
+    color: white;
+
+    font-family: Georgia, serif;
+    font-size: 17px;
+
+    cursor: pointer;
+
+    box-shadow:
+        0 8px 20px rgba(110, 80, 0, 0.25);
+
+    transition:
+        transform .3s ease,
+        box-shadow .3s ease;
+}
+
+.boton-descubrir:hover {
+    transform: translateY(-3px);
+
+    box-shadow:
+        0 12px 25px rgba(110, 80, 0, 0.3);
+}
+
+.pista {
+    margin-top: 18px;
+
+    font-size: 13px;
+
+    color: #89733b;
+}
+
+
+/* =========================
+   CONTENIDO PRINCIPAL
+   ========================= */
+
+#contenido {
+    display: none;
+
+    min-height: 100vh;
+
+    padding:
+        70px 20px
+        60px;
+
+    text-align: center;
+
+    animation: aparecerContenido 2s ease;
+}
+
+#contenido.visible {
+    display: block;
+}
+
+@keyframes aparecerContenido {
+
+    from {
+        opacity: 0;
+        transform: translateY(25px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+}
+
+.primavera {
+    font-size: 58px;
+
+    margin-bottom: 10px;
+
+    animation:
+        flotar 3s ease-in-out infinite;
+}
+
 .titulo {
-    font-size: 34px;
-    color: #b8860b;
+    margin: 0;
+
+    font-size: clamp(30px, 8vw, 48px);
+
+    font-weight: normal;
+
+    color: #b08208;
 }
 
 .subtitulo {
-    font-size: 18px;
-    margin-bottom: 25px;
+    margin:
+        12px auto
+        35px;
+
+    font-size: 17px;
+
+    color: #766335;
 }
 
-/* Tablero */
+
+/* =========================
+   TABLERO DE AJEDREZ
+   ========================= */
+
+.tablero-contenedor {
+    margin: 30px auto;
+
+    width: min(310px, 88vw);
+}
 
 .tablero {
-    width: 280px;
-    height: 280px;
-    margin: 25px auto;
+
     display: grid;
-    grid-template-columns: repeat(8, 1fr);
-    border: 6px solid #6b4f1d;
-    box-shadow: 0 8px 20px rgba(0,0,0,.2);
+
+    grid-template-columns:
+        repeat(8, 1fr);
+
+    width: 100%;
+    aspect-ratio: 1;
+
+    border: 7px solid #5a4119;
+
+    border-radius: 4px;
+
+    overflow: hidden;
+
+    box-shadow:
+        0 12px 30px rgba(70, 50, 10, .25);
+
+    transform: perspective(700px) rotateX(3deg);
 }
 
 .casilla {
+
     display: flex;
+
     align-items: center;
     justify-content: center;
-    font-size: 25px;
+
+    font-family:
+        "Times New Roman",
+        serif;
+
+    font-size: clamp(18px, 6vw, 30px);
+
+    user-select: none;
 }
 
-.casilla:nth-child(odd) {
-    background: #f6df9c;
+.casilla.clara {
+    background: #f3d995;
 }
 
-.casilla:nth-child(even) {
-    background: #8b6b35;
+.casilla.oscura {
+    background: #80602d;
 }
 
-/* Mensaje */
+.tablero-texto {
+
+    margin-top: 12px;
+
+    font-size: 14px;
+
+    font-style: italic;
+
+    color: #806c38;
+}
+
+
+/* =========================
+   TARJETA DEL MENSAJE
+   ========================= */
 
 .mensaje {
+
     max-width: 650px;
-    margin: 35px auto;
-    background: rgba(255,255,255,.75);
-    padding: 30px;
-    border-radius: 20px;
-    box-shadow: 0 5px 20px rgba(0,0,0,.12);
-    line-height: 1.8;
-    font-size: 18px;
+
+    margin:
+        45px auto
+        25px;
+
+    padding:
+        30px 25px;
+
+    border-radius: 24px;
+
+    background:
+        rgba(255, 255, 255, .72);
+
+    border:
+        1px solid rgba(192, 157, 56, .25);
+
+    box-shadow:
+        0 10px 35px rgba(90, 70, 20, .12);
+
+    text-align: left;
+
+    line-height: 1.85;
+
+    font-size: 17px;
+
+    animation: tarjeta 1.5s ease;
+}
+
+@keyframes tarjeta {
+
+    from {
+        opacity: 0;
+        transform: translateY(25px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+}
+
+.saludo {
+
+    text-align: center;
+
+    font-size: 26px;
+
+    color: #b08208;
+
+    margin-bottom: 25px;
+}
+
+.mensaje p {
+    margin: 0 0 20px;
+}
+
+.destacado {
+
+    text-align: center;
+
+    font-size: 20px;
+
+    color: #9c770c;
 }
 
 .firma {
-    margin-top: 25px;
+
+    text-align: center;
+
+    margin-top: 30px;
+
     font-size: 20px;
-    color: #b8860b;
+
+    color: #b08208;
 }
 
-/* Flores */
+
+/* =========================
+   FLORES ANIMADAS
+   ========================= */
 
 .flor {
+
     position: fixed;
-    top: -50px;
-    font-size: 30px;
-    animation: caer linear infinite;
+
+    top: -60px;
+
+    z-index: 500;
+
     pointer-events: none;
+
+    font-size: 28px;
+
+    animation:
+        caer linear forwards;
 }
 
 @keyframes caer {
+
     0% {
-        transform: translateY(-50px) rotate(0deg);
+
+        transform:
+            translateY(-70px)
+            rotate(0deg);
+
         opacity: 0;
+
     }
 
-    15% {
+    10% {
         opacity: 1;
     }
 
-    100% {
-        transform: translateY(110vh) rotate(360deg);
-        opacity: 0;
+    90% {
+        opacity: .9;
     }
+
+    100% {
+
+        transform:
+            translateY(110vh)
+            rotate(360deg);
+
+        opacity: 0;
+
+    }
+
 }
 
-.corazon {
-    font-size: 25px;
+
+/* =========================
+   DECORACIÓN FINAL
+   ========================= */
+
+.final {
+
+    margin-top: 45px;
+
+    padding-bottom: 30px;
+
+    text-align: center;
+}
+
+.final .flores {
+
+    font-size: 30px;
+
+    letter-spacing: 8px;
+
+    margin-bottom: 15px;
+}
+
+.final p {
+
+    margin: 0;
+
+    font-size: 14px;
+
+    color: #8b763e;
+}
+
+
+/* =========================
+   RESPONSIVE
+   ========================= */
+
+@media (max-width: 480px) {
+
+    #contenido {
+        padding-top: 55px;
+    }
+
+    .mensaje {
+        padding: 25px 20px;
+        font-size: 16px;
+    }
+
+    .saludo {
+        font-size: 24px;
+    }
+
+    .inicio-contenido .frase {
+        font-size: 16px;
+    }
+
 }
 
 </style>
 </head>
 
+
 <body>
 
-<div id='inicio'>
 
-    <div style='font-size:60px;'>♟️</div>
+<!-- =========================
+     PANTALLA INICIAL
+     ========================= -->
 
-    <h1>Karyn, tienes una jugada pendiente...</h1>
+<section id="inicio">
 
-    <p>
-        Hay pequeñas sorpresas que merecen ser descubiertas.
-    </p>
+    <div class="inicio-contenido">
 
-    <button class='boton' onclick='mostrarSorpresa()'>
-        Hacer mi jugada ♟️
-    </button>
+        <div class="pieza-principal">
+            ♟️
+        </div>
 
-</div>
+        <h1>
+            Karyn, tienes una jugada pendiente...
+        </h1>
+
+        <p class="frase">
+            Hay encuentros que comienzan con un café,
+            una conversación y, a veces, una pequeña sorpresa.
+        </p>
+
+        <button
+            class="boton-descubrir"
+            onclick="descubrir()">
+
+            Hacer mi jugada ♟️
+
+        </button>
+
+        <div class="pista">
+            Una pequeña sorpresa por el inicio de la primavera 🌼
+        </div>
+
+    </div>
+
+</section>
 
 
-<div id='contenido'>
 
-    <div style='font-size:55px;'>🌼</div>
+<!-- =========================
+     CONTENIDO
+     ========================= -->
 
-    <h1 class='titulo'>
-        Feliz inicio de primavera, Karyn
+<main id="contenido">
+
+
+    <div class="primavera">
+        🌼
+    </div>
+
+
+    <h1 class="titulo">
+        Feliz inicio de primavera
     </h1>
 
-    <p class='subtitulo'>
-        Una pequeña sorpresa para comenzar esta nueva estación.
+
+    <p class="subtitulo">
+        Una pequeña sorpresa para ti, Karyn 💛
     </p>
 
 
-    <div class='tablero'>
 
-        <div class='casilla'>♜</div>
-        <div class='casilla'></div>
-        <div class='casilla'>♝</div>
-        <div class='casilla'>♛</div>
-        <div class='casilla'>♚</div>
-        <div class='casilla'></div>
-        <div class='casilla'>♞</div>
-        <div class='casilla'>♜</div>
+    <!-- TABLERO -->
 
-        <div class='casilla'></div>
-        <div class='casilla'>♟</div>
-        <div class='casilla'></div>
-        <div class='casilla'>♟</div>
-        <div class='casilla'>♟</div>
-        <div class='casilla'></div>
-        <div class='casilla'>♟</div>
-        <div class='casilla'></div>
+    <div class="tablero-contenedor">
 
-        <div class='casilla'>♟</div>
-        <div class='casilla'></div>
-        <div class='casilla'>♞</div>
-        <div class='casilla'></div>
-        <div class='casilla'></div>
-        <div class='casilla'>♝</div>
-        <div class='casilla'></div>
-        <div class='casilla'>♟</div>
+        <div class="tablero">
 
-        <div class='casilla'></div>
-        <div class='casilla'></div>
-        <div class='casilla'>♟</div>
-        <div class='casilla'></div>
-        <div class='casilla'>♟</div>
-        <div class='casilla'></div>
-        <div class='casilla'></div>
-        <div class='casilla'></div>
+            <!-- Fila 1 -->
 
-        <div class='casilla'></div>
-        <div class='casilla'></div>
-        <div class='casilla'></div>
-        <div class='casilla'>♙</div>
-        <div class='casilla'></div>
-        <div class='casilla'></div>
-        <div class='casilla'></div>
-        <div class='casilla'></div>
+            <div class="casilla oscura">♜</div>
+            <div class="casilla clara">♞</div>
+            <div class="casilla oscura">♝</div>
+            <div class="casilla clara">♛</div>
+            <div class="casilla oscura">♚</div>
+            <div class="casilla clara">♝</div>
+            <div class="casilla oscura">♞</div>
+            <div class="casilla clara">♜</div>
 
-        <div class='casilla'></div>
-        <div class='casilla'></div>
-        <div class='casilla'></div>
-        <div class='casilla'></div>
-        <div class='casilla'>♘</div>
-        <div class='casilla'></div>
-        <div class='casilla'></div>
-        <div class='casilla'></div>
 
-        <div class='casilla'>♙</div>
-        <div class='casilla'>♙</div>
-        <div class='casilla'>♙</div>
-        <div class='casilla'></div>
-        <div class='casilla'>♙</div>
-        <div class='casilla'>♙</div>
-        <div class='casilla'>♙</div>
-        <div class='casilla'>♙</div>
+            <!-- Fila 2 -->
 
-        <div class='casilla'>♖</div>
-        <div class='casilla'>♘</div>
-        <div class='casilla'>♗</div>
-        <div class='casilla'>♕</div>
-        <div class='casilla'>♔</div>
-        <div class='casilla'>♗</div>
-        <div class='casilla'></div>
-        <div class='casilla'>♖</div>
+            <div class="casilla clara">♟</div>
+            <div class="casilla oscura">♟</div>
+            <div class="casilla clara">♟</div>
+            <div class="casilla oscura">♟</div>
+            <div class="casilla clara">♟</div>
+            <div class="casilla oscura">♟</div>
+            <div class="casilla clara">♟</div>
+            <div class="casilla oscura">♟</div>
+
+
+            <!-- Fila 3 -->
+
+            <div class="casilla oscura"></div>
+            <div class="casilla clara"></div>
+            <div class="casilla oscura"></div>
+            <div class="casilla clara"></div>
+            <div class="casilla oscura"></div>
+            <div class="casilla clara"></div>
+            <div class="casilla oscura"></div>
+            <div class="casilla clara"></div>
+
+
+            <!-- Fila 4 -->
+
+            <div class="casilla clara"></div>
+            <div class="casilla oscura"></div>
+            <div class="casilla clara"></div>
+            <div class="casilla oscura"></div>
+            <div class="casilla clara"></div>
+            <div class="casilla oscura"></div>
+            <div class="casilla clara"></div>
+            <div class="casilla oscura"></div>
+
+
+            <!-- Fila 5 -->
+
+            <div class="casilla oscura"></div>
+            <div class="casilla clara"></div>
+            <div class="casilla oscura"></div>
+            <div class="casilla clara">♙</div>
+            <div class="casilla oscura"></div>
+            <div class="casilla clara"></div>
+            <div class="casilla oscura"></div>
+            <div class="casilla clara"></div>
+
+
+            <!-- Fila 6 -->
+
+            <div class="casilla clara"></div>
+            <div class="casilla oscura"></div>
+            <div class="casilla clara"></div>
+            <div class="casilla oscura"></div>
+            <div class="casilla clara">♘</div>
+            <div class="casilla oscura"></div>
+            <div class="casilla clara"></div>
+            <div class="casilla oscura"></div>
+
+
+            <!-- Fila 7 -->
+
+            <div class="casilla oscura">♙</div>
+            <div class="casilla clara">♙</div>
+            <div class="casilla oscura">♙</div>
+            <div class="casilla clara"></div>
+            <div class="casilla oscura">♙</div>
+            <div class="casilla clara">♙</div>
+            <div class="casilla oscura">♙</div>
+            <div class="casilla clara">♙</div>
+
+
+            <!-- Fila 8 -->
+
+            <div class="casilla clara">♖</div>
+            <div class="casilla oscura">♘</div>
+            <div class="casilla clara">♗</div>
+            <div class="casilla oscura">♕</div>
+            <div class="casilla clara">♔</div>
+            <div class="casilla oscura">♗</div>
+            <div class="casilla clara">♘</div>
+            <div class="casilla oscura">♖</div>
+
+        </div>
+
+
+        <div class="tablero-texto">
+            Algunas jugadas simplemente hacen más bonito el camino. ♟️
+        </div>
+
+    </div>
+
+
+
+    <!-- MENSAJE -->
+
+    <section class="mensaje">
+
+        <div class="saludo">
+            Karyn 🌼
+        </div>
+
+
+        <p>
+            Hoy comienza la primavera y pensé que era una
+            buena ocasión para regalarte un pequeño detalle.
+        </p>
+
+
+        <p>
+            Hace apenas una semana tuvimos la oportunidad
+            de compartir un café y una conversación, y me
+            quedé con una muy bonita impresión de ti.
+        </p>
+
+
+        <p>
+            Me pareció muy agradable conocerte y descubrir,
+            entre otras cosas, que te gusta el ajedrez. ♟️
+        </p>
+
+
+        <p>
+            Así que hoy quería dejarte algo sencillo,
+            pero hecho especialmente para ti.
+        </p>
+
+
+        <p class="destacado">
+            Que esta primavera llegue con muchas cosas bonitas,
+            nuevas experiencias y buenas conversaciones...
+        </p>
+
+
+        <p>
+            Y, por supuesto, algunas partidas de ajedrez
+            que valga la pena jugar. ♟️🌼
+        </p>
+
+
+        <p>
+            Feliz inicio de primavera, Karyn. 💛
+        </p>
+
+
+        <p class="firma">
+            Espero que tengas un día tan bonito
+            como las flores que hoy comienzan a florecer.
+        </p>
+
+    </section>
+
+
+
+    <!-- FINAL -->
+
+    <div class="final">
+
+        <div class="flores">
+            🌼 🌼 🌼
+        </div>
+
+        <p>
+            Una pequeña jugada de primavera.
+        </p>
 
     </div>
 
 
-    <div class='mensaje'>
+</main>
 
-        <p>
-        Karyn 🌼
-        </p>
-
-        <p>
-        Hoy comienza la primavera, y pensé que era una buena
-        ocasión para regalarte un pequeño detalle.
-        </p>
-
-        <p>
-        Hace apenas una semana tuvimos la oportunidad de
-        compartir un café y una conversación, y me quedé con
-        una muy bonita impresión de ti.
-        </p>
-
-        <p>
-        Me pareció muy agradable conocerte y descubrir,
-        entre otras cosas, que te gusta el ajedrez. ♟️
-        </p>
-
-        <p>
-        Así que hoy quería dejarte algo sencillo, pero hecho
-        especialmente para ti:
-        </p>
-
-        <p>
-        Que esta primavera llegue con muchas cosas bonitas,
-        nuevas experiencias, buenas conversaciones...
-        y, por supuesto, algunas partidas de ajedrez que
-        valga la pena jugar. 🌼♟️
-        </p>
-
-        <p>
-        Feliz inicio de primavera, Karyn. 💛
-        </p>
-
-        <p class='firma'>
-        Espero que tengas un día tan bonito como las flores
-        que hoy comienzan a florecer.
-        </p>
-
-    </div>
-
-</div>
 
 
 <script>
 
-function mostrarSorpresa() {
 
-    document.getElementById('inicio').style.opacity = '0';
+/* =========================
+   DESCUBRIR LA SORPRESA
+   ========================= */
+
+function descubrir() {
+
+    const inicio =
+        document.getElementById("inicio");
+
+    const contenido =
+        document.getElementById("contenido");
+
+
+    /* Ocultar pantalla inicial */
+
+    inicio.classList.add("ocultar");
+
+
+    /* Mostrar contenido */
 
     setTimeout(function() {
 
-        document.getElementById('inicio').style.display = 'none';
-
-        document.getElementById('contenido').style.display = 'block';
+        contenido.classList.add("visible");
 
         crearFlores();
 
-    }, 1500);
+        window.scrollTo({
+            top: 0,
+            behavior: "smooth"
+        });
+
+    }, 900);
+
 }
 
 
+
+/* =========================
+   CREAR FLORES
+   ========================= */
+
 function crearFlores() {
 
-    const simbolos = ['🌼','🌼','🌻','🌼'];
+    const flores = [
+        "🌼",
+        "🌼",
+        "🌻",
+        "🌼",
+        "🌼"
+    ];
 
-    for (let i = 0; i < 20; i++) {
 
-        let flor = document.createElement('div');
+    for (let i = 0; i < 30; i++) {
 
-        flor.className = 'flor';
+        const flor =
+            document.createElement("div");
+
+
+        flor.className = "flor";
+
 
         flor.innerHTML =
-            simbolos[Math.floor(Math.random() * simbolos.length)];
+            flores[
+                Math.floor(
+                    Math.random() * flores.length
+                )
+            ];
 
-        flor.style.left = Math.random() * 100 + '%';
+
+        /* Posición horizontal */
+
+        flor.style.left =
+            Math.random() * 100 + "%";
+
+
+        /* Tamaño */
+
+        const tamaño =
+            18 + Math.random() * 18;
+
+        flor.style.fontSize =
+            tamaño + "px";
+
+
+        /* Velocidad */
+
+        const velocidad =
+            5 + Math.random() * 8;
 
         flor.style.animationDuration =
-            (5 + Math.random() * 7) + 's';
+            velocidad + "s";
+
+
+        /* Retraso */
 
         flor.style.animationDelay =
-            Math.random() * 5 + 's';
+            Math.random() * 5 + "s";
+
 
         document.body.appendChild(flor);
+
+
+        /* Eliminar después de la animación */
+
+        setTimeout(function() {
+
+            flor.remove();
+
+        }, 15000);
+
     }
+
 }
 
 </script>
 
+
 </body>
 </html>
-"
-
-        Dim ruta As String =
-            Path.Combine(Environment.CurrentDirectory, "index.html")
-
-        File.WriteAllText(
-            ruta,
-            html,
-            Encoding.UTF8
-        )
-
-        Console.WriteLine("======================================")
-        Console.WriteLine(" SORPRESA PARA KARYN")
-        Console.WriteLine("======================================")
-        Console.WriteLine()
-        Console.WriteLine("La página fue creada correctamente.")
-        Console.WriteLine()
-        Console.WriteLine("Archivo:")
-        Console.WriteLine(ruta)
-        Console.WriteLine()
-        Console.WriteLine("Presiona ENTER para salir.")
-
-        Console.ReadLine()
-
-    End Sub
-
-End Module
